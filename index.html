@@ -28,7 +28,11 @@
       border-radius: 15px;
       overflow: hidden;
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      background-color: #ffffff;
+
+      /* Ảnh nền cho ô chat */
+      background: url("your-image.png") no-repeat center center;
+      background-size: cover;
+
       display: flex;
       flex-direction: column;
     }
@@ -37,11 +41,13 @@
     df-messenger {
       width: 100%;
       height: 100%;
-      --df-messenger-bot-message: #e2f0ff;
+      background: transparent; /* trong suốt để thấy ảnh nền */
+
+      --df-messenger-bot-message: rgba(226, 240, 255, 0.9);
       --df-messenger-button-titlebar-color: #1a73e8;
-      --df-messenger-chat-background-color: #ffffff;
+      --df-messenger-chat-background-color: transparent; /* để nền không che ảnh */
       --df-messenger-font-color: #000000;
-      --df-messenger-user-message: #d1eaff;
+      --df-messenger-user-message: rgba(209, 234, 255, 0.9);
     }
 
     /* CSS cho info-box */
