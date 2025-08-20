@@ -108,24 +108,24 @@
       --df-messenger-font-color: #000000;
     }
 
-    /* Floating button */
+    /* Floating button gắn trên chat */
     .chat-toggle-btn {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
+      position: absolute;
+      top: 10px;
+      right: 10px;
       background: #1a73e8;
       color: white;
       border: none;
       border-radius: 50px;
-      padding: 15px 20px;
-      font-size: 1rem;
+      padding: 10px 15px;
+      font-size: 0.9rem;
       cursor: pointer;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
-      z-index: 200;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 3;
       animation: pulse 2s infinite;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 5px;
       transition: transform 0.2s, background 0.2s;
     }
 
@@ -140,7 +140,6 @@
       100% { transform: scale(1); }
     }
 
-    /* Animation chat container */
     @keyframes slideFade {
       to {
         opacity: 1;
@@ -155,8 +154,8 @@
         height: 400px;
       }
       .chat-toggle-btn {
-        padding: 12px 18px;
-        font-size: 0.9rem;
+        padding: 8px 12px;
+        font-size: 0.8rem;
       }
     }
   </style>
@@ -182,6 +181,7 @@
 
   <!-- Chatbot container -->
   <div class="chat-container" id="chat-container">
+    <button class="chat-toggle-btn" id="chat-toggle-btn">💬 Ask me anything</button>
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
     <df-messenger
       intent="WELCOME"
@@ -191,15 +191,11 @@
     ></df-messenger>
   </div>
 
-  <!-- Floating button -->
-  <button class="chat-toggle-btn" id="chat-toggle-btn">💬 Ask me anything</button>
-
   <script>
     const chatBtn = document.getElementById('chat-toggle-btn');
     const chatContainer = document.getElementById('chat-container');
 
     chatBtn.addEventListener('click', () => {
-      // Scroll vào chat container khi nhấn nút
       chatContainer.scrollIntoView({ behavior: 'smooth' });
     });
   </script>
