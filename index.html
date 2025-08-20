@@ -62,10 +62,17 @@
       color: #1a73e8;
     }
 
+    /* Container chứa chat + biểu tượng */
+    .chat-wrapper {
+      display: flex;
+      align-items: flex-end;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
     /* Chat container */
     .chat-container {
       position: relative;
-      margin-top: 30px;
       width: 420px;
       height: 550px;
       border-radius: 25px;
@@ -77,7 +84,7 @@
       animation: slideFade 0.8s forwards;
     }
 
-    /* Ảnh nền hiển thị trong chat */
+    /* Ảnh nền */
     .chat-container::before {
       content: '';
       position: absolute;
@@ -86,19 +93,15 @@
       background: url("chatbot.png") no-repeat center center;
       background-size: cover;
       border-radius: 25px;
-      opacity: 0.8; /* overlay mờ để các tin nhắn nổi bật */
+      opacity: 0.2; /* giảm độ mờ để ảnh rõ hơn */
       z-index: 1;
     }
 
     /* Dialogflow Messenger */
     df-messenger {
       width: 100%;
-      flex: 1; /* chiếm hết không gian */
-      background: url("chatbot.png") no-repeat center center;
+      flex: 1;
       background: transparent;
-      background-size: cover;
-      border-radius: 25px;
-      opacity: 0.8;
       position: relative;
       z-index: 2;
 
@@ -107,9 +110,34 @@
       --df-messenger-button-titlebar-color: #1a73e8;
       --df-messenger-chat-background-color: transparent;
       --df-messenger-font-color: #000000;
+
+      padding-top: 20px;
+      padding-left: 10px;
+      padding-right: 10px;
     }
 
-    /* Animation */
+    /* Biểu tượng bên cạnh chat */
+    .chat-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #1a73e8;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
+    }
+
+    .chat-icon:hover {
+      transform: scale(1.1);
+      background-color: #155ab6;
+    }
+
     @keyframes slideFade {
       to {
         opacity: 1;
@@ -117,8 +145,11 @@
       }
     }
 
-    /* Responsive */
     @media (max-width: 480px) {
+      .chat-wrapper {
+        flex-direction: column;
+        align-items: center;
+      }
       .chat-container {
         width: 95%;
         height: 400px;
@@ -129,14 +160,9 @@
 <body>
   <h1>Chatbot Demo</h1>
 
-  <!-- About the Chatbot -->
   <div class="info-box">
     <h2>About the Chatbot</h2>
-    <p>
-      This AI-powered chatbot is designed to support university students 
-      by answering frequently asked questions about admissions, courses, 
-      campus life, and more.
-    </p>
+    <p>This AI-powered chatbot is designed to support university students by answering frequently asked questions about admissions, courses, campus life, and more.</p>
     <p>Try asking questions like:</p>
     <ul>
       <li>What are the admission requirements?</li>
@@ -145,15 +171,22 @@
     </ul>
   </div>
 
-  <!-- Chatbot container -->
-  <div class="chat-container" id="chat-container">
-    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-    <df-messenger
-      intent="WELCOME"
-      chat-title="University_Student_Chatbot"
-      agent-id="82116dd8-0546-4e45-a914-cf0b8be9c418"
-      language-code="en"
-    ></df-messenger>
+  <!-- Chat + Icon -->
+  <div class="chat-wrapper">
+    <div class="chat-container" id="chat-container">
+      <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+      <df-messenger
+        intent="WELCOME"
+        chat-title="University_Student_Chatbot"
+        agent-id="82116dd8-0546-4e45-a914-cf0b8be9c418"
+        language-code="en"
+      ></df-messenger>
+    </div>
+
+    <!-- Biểu tượng mở chat -->
+    <button class="chat-icon" onclick="document.getElementById('chat-container').scrollIntoView({behavior:'smooth'});">
+      💬
+    </button>
   </div>
 </body>
 </html>
