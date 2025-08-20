@@ -86,7 +86,7 @@
       background: url("chatbot.png") no-repeat center center;
       background-size: cover;
       border-radius: 25px;
-      opacity: 0.3; /* overlay mờ để các tin nhắn nổi bật */
+      opacity: 0.1; /* overlay mờ để các tin nhắn nổi bật */
       z-index: 1;
     }
 
@@ -103,6 +103,9 @@
       --df-messenger-button-titlebar-color: #1a73e8;
       --df-messenger-chat-background-color: transparent;
       --df-messenger-font-color: #000000;
+      padding-top: 20px; /* dịch xuống 20px từ trên */
+      padding-left: 10px; /* nếu muốn dịch sang phải/giữ cách lề */
+      padding-right: 10px;
     }
 
     /* Animation */
@@ -123,7 +126,7 @@
   </style>
 </head>
 <body>
-  <h1>Capstone Chatbot Demo</h1>
+  <h1>Chatbot Demo</h1>
 
   <!-- About the Chatbot -->
   <div class="info-box">
