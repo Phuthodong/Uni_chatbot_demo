@@ -13,7 +13,6 @@
       min-height: 100vh;
       margin: 0;
       background: linear-gradient(135deg, #f0f4ff, #e2f0ff);
-      position: relative;
     }
 
     h1 {
@@ -96,7 +95,7 @@
     /* Dialogflow Messenger */
     df-messenger {
       width: 100%;
-      height: 100%;
+      flex: 1; /* chiếm hết không gian trừ nút */
       background: transparent;
       position: relative;
       z-index: 2;
@@ -108,43 +107,42 @@
       --df-messenger-font-color: #000000;
     }
 
-    /* Floating button gắn trên chat */
+    /* Nút Ask me anything gắn dưới cùng chat */
     .chat-toggle-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
+      position: relative; /* nằm trong khung chat */
+      margin: 10px auto;
       background: #1a73e8;
       color: white;
       border: none;
-      border-radius: 50px;
-      padding: 10px 15px;
+      border-radius: 25px;
+      padding: 10px 20px;
       font-size: 0.9rem;
       cursor: pointer;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      z-index: 3;
-      animation: pulse 2s infinite;
       display: flex;
       align-items: center;
       gap: 5px;
       transition: transform 0.2s, background 0.2s;
+      z-index: 3;
     }
 
     .chat-toggle-btn:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
       background: #155ab6;
+    }
+
+    /* Animation */
+    @keyframes slideFade {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @keyframes pulse {
       0% { transform: scale(1); }
       50% { transform: scale(1.05); }
       100% { transform: scale(1); }
-    }
-
-    @keyframes slideFade {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     /* Responsive */
@@ -181,7 +179,6 @@
 
   <!-- Chatbot container -->
   <div class="chat-container" id="chat-container">
-    <button class="chat-toggle-btn" id="chat-toggle-btn">💬 Ask me anything</button>
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
     <df-messenger
       intent="WELCOME"
@@ -189,6 +186,7 @@
       agent-id="82116dd8-0546-4e45-a914-cf0b8be9c418"
       language-code="en"
     ></df-messenger>
+    <button class="chat-toggle-btn" id="chat-toggle-btn">💬 Ask me anything</button>
   </div>
 
   <script>
@@ -201,3 +199,4 @@
   </script>
 </body>
 </html>
+`
