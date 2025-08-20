@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Capstone Chatbot Demo</title>
+  <title>Chatbot Demo</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -71,31 +71,29 @@
       border-radius: 25px;
       overflow: hidden;
       box-shadow: 0 12px 30px rgba(0,0,0,0.2);
-      background: url("chatbot.png") no-repeat center center;
-      background-size: cover;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: slideFade 0.8s forwards;
       display: flex;
       flex-direction: column;
       z-index: 100;
+      animation: slideFade 0.8s forwards;
     }
 
-    /* Overlay mờ */
+    /* Ảnh nền hiển thị trong chat */
     .chat-container::before {
       content: '';
       position: absolute;
       width: 100%;
       height: 100%;
-      background: rgba(255, 255, 255, 0.3);
+      background: url("chatbot.png") no-repeat center center;
+      background-size: cover;
       border-radius: 25px;
+      opacity: 0.3; /* overlay mờ để các tin nhắn nổi bật */
       z-index: 1;
     }
 
     /* Dialogflow Messenger */
     df-messenger {
       width: 100%;
-      flex: 1; /* chiếm hết không gian trừ nút */
+      flex: 1; /* chiếm hết không gian */
       background: transparent;
       position: relative;
       z-index: 2;
@@ -107,30 +105,6 @@
       --df-messenger-font-color: #000000;
     }
 
-    /* Nút Ask me anything gắn dưới cùng chat */
-    .chat-toggle-btn {
-      position: relative; /* nằm trong khung chat */
-      margin: 10px auto;
-      background: #1a73e8;
-      color: white;
-      border: none;
-      border-radius: 25px;
-      padding: 10px 20px;
-      font-size: 0.9rem;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      transition: transform 0.2s, background 0.2s;
-      z-index: 3;
-    }
-
-    .chat-toggle-btn:hover {
-      transform: scale(1.05);
-      background: #155ab6;
-    }
-
     /* Animation */
     @keyframes slideFade {
       to {
@@ -139,21 +113,11 @@
       }
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
     /* Responsive */
     @media (max-width: 480px) {
       .chat-container {
         width: 95%;
         height: 400px;
-      }
-      .chat-toggle-btn {
-        padding: 8px 12px;
-        font-size: 0.8rem;
       }
     }
   </style>
@@ -186,17 +150,6 @@
       agent-id="82116dd8-0546-4e45-a914-cf0b8be9c418"
       language-code="en"
     ></df-messenger>
-    <button class="chat-toggle-btn" id="chat-toggle-btn">💬 Ask me anything</button>
   </div>
-
-  <script>
-    const chatBtn = document.getElementById('chat-toggle-btn');
-    const chatContainer = document.getElementById('chat-container');
-
-    chatBtn.addEventListener('click', () => {
-      chatContainer.scrollIntoView({ behavior: 'smooth' });
-    });
-  </script>
 </body>
 </html>
-`
