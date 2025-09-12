@@ -17,6 +17,7 @@
       background: #ffffff;
     }
 
+    /* Logo nền mờ toàn trang */
     body::before {
       content: "";
       position: fixed;
@@ -36,6 +37,7 @@
       text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     }
 
+    /* Ô nội dung */
     .info-box {
       text-align: left;
       padding: 20px;
@@ -75,13 +77,10 @@
       background: #ffd633;
     }
 
-    .btn-container {
+    /* Nút back */
+    .back-btn {
+      display: inline-block;
       margin-top: 15px;
-      display: flex;
-      gap: 10px;
-    }
-
-    .btn {
       padding: 8px 14px;
       background: #003366;
       color: #fff;
@@ -90,13 +89,12 @@
       text-decoration: none;
       font-size: 14px;
       transition: 0.3s;
-      display: inline-block;
     }
-
-    .btn:hover {
+    .back-btn:hover {
       background: #0055aa;
     }
 
+    /* Khung chatbot */
     .chat-container {
       margin-top: 20px;
       width: 420px;
@@ -125,8 +123,9 @@
 <body>
   <h1>BVU Support</h1>
 
+  <!-- Ô about -->
   <div class="info-box" id="info-box">
-    <h2>About the BVU Chatbot</h2>
+    <h2>BVU Support Sevice</h2>
     <ul>
       <li id="menu-admissions">Admissions</li>
       <li id="menu-courses">Courses</li>
@@ -135,6 +134,7 @@
     </ul>
   </div>
 
+  <!-- Chatbot container -->
   <div class="chat-container">
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
     <df-messenger
@@ -148,6 +148,7 @@
   <script>
     const infoBox = document.getElementById("info-box");
 
+    // Menu gốc
     const mainMenu = `
       <h2>About the BVU Chatbot</h2>
       <ul>
@@ -158,27 +159,37 @@
       </ul>
     `;
 
+    // Nội dung chi tiết
     const contents = {
       admissions: `
         <h2>Admissions</h2>
         <p>Find information about admission requirements, deadlines, and process.</p>
-        <div class="btn-container">
-          <div class="btn" onclick="goBack()">← Back</div>
-        </div>
+        <ul>
+          <li>Undergraduate Admissions</li>
+          <li>Postgraduate Admissions</li>
+          <li>International Students</li>
+        </ul>
+        <div class="back-btn" onclick="goBack()">← Back</div>
       `,
       courses: `
         <h2>Courses</h2>
         <p>Explore the wide range of courses offered at BVU.</p>
-        <div class="btn-container">
-          <div class="btn" onclick="goBack()">← Back</div>
-        </div>
+        <ul>
+          <li>Undergraduate Programs</li>
+          <li>Postgraduate Programs</li>
+          <li>Short Courses</li>
+        </ul>
+        <div class="back-btn" onclick="goBack()">← Back</div>
       `,
       campus: `
         <h2>Campus Life</h2>
         <p>Learn more about the facilities and activities on campus.</p>
-        <div class="btn-container">
-          <div class="btn" onclick="goBack()">← Back</div>
-        </div>
+        <ul>
+          <li>Library and Study Spaces</li>
+          <li>Clubs and Societies</li>
+          <li>Sports and Recreation</li>
+        </ul>
+        <div class="back-btn" onclick="goBack()">← Back</div>
       `,
       chatbot: `
         <h2>BVU Chatbot</h2>
@@ -193,24 +204,34 @@
           <li>How do I apply for a course?</li>
           <li>Tell me about campus facilities.</li>
         </ul>
-        <div class="btn-container">
-          <div class="btn" onclick="goBack()">← Back</div>
-          <div class="btn" onclick="scrollToChat()">💬 Chat with Bot</div>
-        </div>
+        <div class="back-btn" onclick="goBack()">← Back</div>
       `
     };
 
+    // Quay về menu
     function goBack() {
       infoBox.innerHTML = mainMenu;
       attachEvents();
     }
 
-    function scrollToChat() {
-      document.querySelector('.chat-container').scrollIntoView({ behavior: 'smooth' });
-    }
-
+    // Gắn sự kiện cho menu
     function attachEvents() {
       document.getElementById("menu-admissions").addEventListener("click", () => {
         infoBox.innerHTML = contents.admissions;
       });
-      document.getElementById("menu-courses").addEv
+      document.getElementById("menu-courses").addEventListener("click", () => {
+        infoBox.innerHTML = contents.courses;
+      });
+      document.getElementById("menu-campus").addEventListener("click", () => {
+        infoBox.innerHTML = contents.campus;
+      });
+      document.getElementById("menu-chatbot").addEventListener("click", () => {
+        infoBox.innerHTML = contents.chatbot;
+      });
+    }
+
+    // Khởi tạo
+    attachEvents();
+  </script>
+</body>
+</html>
