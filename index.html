@@ -77,6 +77,23 @@
       background: #ffd633;
     }
 
+    /* Nút back */
+    .back-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 8px 14px;
+      background: #003366;
+      color: #fff;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+    .back-btn:hover {
+      background: #0055aa;
+    }
+
     /* Khung chatbot */
     .chat-container {
       margin-top: 20px;
@@ -131,7 +148,18 @@
   <script>
     const infoBox = document.getElementById("info-box");
 
-    // Nội dung cho từng mục
+    // Menu gốc
+    const mainMenu = `
+      <h2>About the BVU Chatbot</h2>
+      <ul>
+        <li id="menu-admissions">Admissions</li>
+        <li id="menu-courses">Courses</li>
+        <li id="menu-campus">Campus Life</li>
+        <li id="menu-chatbot">Chatbot</li>
+      </ul>
+    `;
+
+    // Nội dung chi tiết
     const contents = {
       admissions: `
         <h2>Admissions</h2>
@@ -141,6 +169,7 @@
           <li>Postgraduate Admissions</li>
           <li>International Students</li>
         </ul>
+        <div class="back-btn" onclick="goBack()">← Back</div>
       `,
       courses: `
         <h2>Courses</h2>
@@ -150,6 +179,7 @@
           <li>Postgraduate Programs</li>
           <li>Short Courses</li>
         </ul>
+        <div class="back-btn" onclick="goBack()">← Back</div>
       `,
       campus: `
         <h2>Campus Life</h2>
@@ -159,6 +189,7 @@
           <li>Clubs and Societies</li>
           <li>Sports and Recreation</li>
         </ul>
+        <div class="back-btn" onclick="goBack()">← Back</div>
       `,
       chatbot: `
         <h2>BVU Chatbot</h2>
@@ -173,22 +204,34 @@
           <li>How do I apply for a course?</li>
           <li>Tell me about campus facilities.</li>
         </ul>
+        <div class="back-btn" onclick="goBack()">← Back</div>
       `
     };
 
-    // Thay đổi nội dung khi click
-    document.getElementById("menu-admissions").addEventListener("click", () => {
-      infoBox.innerHTML = contents.admissions;
-    });
-    document.getElementById("menu-courses").addEventListener("click", () => {
-      infoBox.innerHTML = contents.courses;
-    });
-    document.getElementById("menu-campus").addEventListener("click", () => {
-      infoBox.innerHTML = contents.campus;
-    });
-    document.getElementById("menu-chatbot").addEventListener("click", () => {
-      infoBox.innerHTML = contents.chatbot;
-    });
+    // Quay về menu
+    function goBack() {
+      infoBox.innerHTML = mainMenu;
+      attachEvents();
+    }
+
+    // Gắn sự kiện cho menu
+    function attachEvents() {
+      document.getElementById("menu-admissions").addEventListener("click", () => {
+        infoBox.innerHTML = contents.admissions;
+      });
+      document.getElementById("menu-courses").addEventListener("click", () => {
+        infoBox.innerHTML = contents.courses;
+      });
+      document.getElementById("menu-campus").addEventListener("click", () => {
+        infoBox.innerHTML = contents.campus;
+      });
+      document.getElementById("menu-chatbot").addEventListener("click", () => {
+        infoBox.innerHTML = contents.chatbot;
+      });
+    }
+
+    // Khởi tạo
+    attachEvents();
   </script>
 </body>
 </html>
