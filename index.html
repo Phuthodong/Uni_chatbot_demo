@@ -37,23 +37,13 @@
       text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     }
 
-    /* Container chứa 2 ô song song */
-    .info-container {
-      display: flex;
-      gap: 20px;
-      margin-top: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    /* Hộp thông tin */
+    /* Ô nội dung */
     .info-box {
-      flex: 1;
-      min-width: 300px;
-      max-width: 500px;
-      text-align: left;   /* căn trái */
+      text-align: left;
       padding: 20px;
       color: #003366;
+      max-width: 550px;
+      margin-top: 20px;
       background-color: #ffeb66;
       border-radius: 12px;
       border: 2px solid #003366;
@@ -70,9 +60,21 @@
     }
 
     .info-box ul {
-      text-align: left;
-      padding-left: 25px;
-      margin-top: 10px;
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .info-box li {
+      padding: 10px;
+      margin-bottom: 8px;
+      background: #fff6cc;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .info-box li:hover {
+      background: #ffd633;
     }
 
     /* Khung chatbot */
@@ -104,36 +106,15 @@
 <body>
   <h1>BVU Support</h1>
 
-  <!-- About + Another box song song -->
-  <div class="info-container">
-    <div class="info-box">
-      <h2>About the BVU Chatbot</h2>
-      <p>
-        This AI-powered chatbot is designed to support university students 
-        by answering frequently asked questions about admissions, courses, 
-        campus life, and more.
-      </p>
-      <p>Try asking questions like:</p>
-      <ul>
-        <li>What are the admission requirements?</li>
-        <li>How do I apply for a course?</li>
-        <li>Tell me about campus facilities.</li>
-      </ul>
-    </div>
-
-    <!-- Ô mới thêm -->
-    <div class="info-box">
-      <h2>Extra Information</h2>
-      <p>
-        Here you can add another section, such as contact details, 
-        office hours, or quick links for students.
-      </p>
-      <ul>
-        <li>Contact Student Services</li>
-        <li>Visit the Admissions Office</li>
-        <li>Explore BVU Website</li>
-      </ul>
-    </div>
+  <!-- Ô about -->
+  <div class="info-box" id="info-box">
+    <h2>About the BVU Chatbot</h2>
+    <ul>
+      <li id="menu-admissions">Admissions</li>
+      <li id="menu-courses">Courses</li>
+      <li id="menu-campus">Campus Life</li>
+      <li id="menu-chatbot">Chatbot</li>
+    </ul>
   </div>
 
   <!-- Chatbot container -->
@@ -146,5 +127,68 @@
       language-code="en"
     ></df-messenger>
   </div>
+
+  <script>
+    const infoBox = document.getElementById("info-box");
+
+    // Nội dung cho từng mục
+    const contents = {
+      admissions: `
+        <h2>Admissions</h2>
+        <p>Find information about admission requirements, deadlines, and process.</p>
+        <ul>
+          <li>Undergraduate Admissions</li>
+          <li>Postgraduate Admissions</li>
+          <li>International Students</li>
+        </ul>
+      `,
+      courses: `
+        <h2>Courses</h2>
+        <p>Explore the wide range of courses offered at BVU.</p>
+        <ul>
+          <li>Undergraduate Programs</li>
+          <li>Postgraduate Programs</li>
+          <li>Short Courses</li>
+        </ul>
+      `,
+      campus: `
+        <h2>Campus Life</h2>
+        <p>Learn more about the facilities and activities on campus.</p>
+        <ul>
+          <li>Library and Study Spaces</li>
+          <li>Clubs and Societies</li>
+          <li>Sports and Recreation</li>
+        </ul>
+      `,
+      chatbot: `
+        <h2>BVU Chatbot</h2>
+        <p>
+          This AI-powered chatbot is designed to support university students 
+          by answering frequently asked questions about admissions, courses, 
+          campus life, and more.
+        </p>
+        <p>Try asking questions like:</p>
+        <ul>
+          <li>What are the admission requirements?</li>
+          <li>How do I apply for a course?</li>
+          <li>Tell me about campus facilities.</li>
+        </ul>
+      `
+    };
+
+    // Thay đổi nội dung khi click
+    document.getElementById("menu-admissions").addEventListener("click", () => {
+      infoBox.innerHTML = contents.admissions;
+    });
+    document.getElementById("menu-courses").addEventListener("click", () => {
+      infoBox.innerHTML = contents.courses;
+    });
+    document.getElementById("menu-campus").addEventListener("click", () => {
+      infoBox.innerHTML = contents.campus;
+    });
+    document.getElementById("menu-chatbot").addEventListener("click", () => {
+      infoBox.innerHTML = contents.chatbot;
+    });
+  </script>
 </body>
 </html>
