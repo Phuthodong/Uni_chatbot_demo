@@ -14,7 +14,7 @@
       margin: 0;
       position: relative;
       overflow-x: hidden;
-      background: #ffffff; /* nền trắng */
+      background: #ffffff;
     }
 
     /* Logo nền mờ toàn trang */
@@ -26,33 +26,43 @@
       width: 100%; 
       height: 100%;
       background: url("BVU.png") no-repeat center center;
-      background-size: 2000px; /* chỉnh kích thước logo nền */
-      opacity: 0.1; /* độ mờ */
-      z-index: -1; /* nằm dưới toàn bộ nội dung */
+      background-size: 2000px;
+      opacity: 0.1;
+      z-index: -1;
     }
 
     h1 {
       margin-top: 20px;
-      color: #003366; /* xanh đậm BVU */
+      color: #003366;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    }
+
+    /* Container chứa 2 ô song song */
+    .info-container {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
     /* Hộp thông tin */
     .info-box {
-      text-align: center;
+      flex: 1;
+      min-width: 300px;
+      max-width: 500px;
+      text-align: left;   /* căn trái */
       padding: 20px;
       color: #003366;
-      max-width: 550px;
-      margin-top: 10px;
-      background-color: #ffeb66; /* vàng nhạt */
+      background-color: #ffeb66;
       border-radius: 12px;
       border: 2px solid #003366;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
 
     .info-box h2 {
-      background-color: #003366;  /* nền xanh đậm */
-      color: #ffffff;             /* chữ trắng */
+      background-color: #003366;
+      color: #ffffff;
       padding: 10px 15px;
       border-radius: 8px;
       margin-bottom: 15px;
@@ -73,46 +83,58 @@
       border-radius: 15px;
       overflow: hidden;
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      border: 3px solid #ffcc00; /* viền vàng đậm */
+      border: 3px solid #ffcc00;
       display: flex;
       flex-direction: column;
       background: url("BVU.png") no-repeat center center;
       background-size: cover;
-
-      display: flex;
-      flex-direction: column;/* nền trắng trong mờ để thấy logo nền */
     }
 
-    /* Tùy chỉnh style Dialogflow Messenger */
     df-messenger {
       width: 100%;
       height: 100%; 
-      --df-messenger-bot-message: #e6f0ff;          /* bong bóng bot xanh nhạt */
-      --df-messenger-button-titlebar-color: #003366; /* thanh tiêu đề xanh đậm */
-      --df-messenger-chat-background-color: transparent; /* trong suốt để thấy nền */
-      --df-messenger-font-color: #000000; 
-      --df-messenger-user-message: #ffeb66;          /* bong bóng user vàng nhạt */
+      --df-messenger-bot-message: #e6f0ff;
+      --df-messenger-button-titlebar-color: #003366;
+      --df-messenger-chat-background-color: transparent;
+      --df-messenger-font-color: #000000;
+      --df-messenger-user-message: #ffeb66;
     }
   </style>
 </head>
 <body>
-  <h1>BVU Chatbot</h1>
+  <h1>BVU Support</h1>
 
-  <!-- About the Chatbot -->
-  <div class="info-box">
-    <h2>About the BVU Chatbot</h2>
-    <p>
-      This AI-powered chatbot is designed to support university students 
-      by answering frequently asked questions about admissions, courses, 
-      campus life, and more.
-    </p>
-    <p>Try asking questions like:</p>
-    <ul>
-      <li>What are the admission requirements?</li>
-      <li>How do I apply for a course?</li>
-      <li>Tell me about campus facilities.</li>
-    </ul>
-  </div> 
+  <!-- About + Another box song song -->
+  <div class="info-container">
+    <div class="info-box">
+      <h2>About the BVU Chatbot</h2>
+      <p>
+        This AI-powered chatbot is designed to support university students 
+        by answering frequently asked questions about admissions, courses, 
+        campus life, and more.
+      </p>
+      <p>Try asking questions like:</p>
+      <ul>
+        <li>What are the admission requirements?</li>
+        <li>How do I apply for a course?</li>
+        <li>Tell me about campus facilities.</li>
+      </ul>
+    </div>
+
+    <!-- Ô mới thêm -->
+    <div class="info-box">
+      <h2>Extra Information</h2>
+      <p>
+        Here you can add another section, such as contact details, 
+        office hours, or quick links for students.
+      </p>
+      <ul>
+        <li>Contact Student Services</li>
+        <li>Visit the Admissions Office</li>
+        <li>Explore BVU Website</li>
+      </ul>
+    </div>
+  </div>
 
   <!-- Chatbot container -->
   <div class="chat-container">
