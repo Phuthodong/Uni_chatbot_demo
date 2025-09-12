@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>BVU Support Service</title>
+  <title>BVU Chatbot</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -12,82 +12,73 @@
       justify-content: flex-start;
       min-height: 100vh;
       margin: 0;
-      position: relative;
-      overflow-x: hidden;
-      background: #ffffff; /* nền trắng */
-    }
-
-    /* Logo nền mờ toàn trang */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; 
-      left: 0;
-      width: 100%; 
-      height: 100%;
-      background: url("BVU.png") no-repeat center center;
-      background-size: 500px; /* chỉnh kích thước logo nền */
-      opacity: 0.08; /* độ mờ */
-      z-index: -1; /* nằm dưới toàn bộ nội dung */
+      background: linear-gradient(135deg, #f0f4ff, #e2f0ff);
     }
 
     h1 {
-      margin-top: 20px;
-      color: #003366; /* xanh đậm BVU */
+      margin-top: 40px;
+      color: #1a73e8;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     }
 
-    /* Hộp thông tin */
-    .info-box {
-      text-align: center;
-      padding: 20px;
-      color: #003366;
-      max-width: 550px;
-      margin-top: 10px;
-      background-color: #ffeb66; /* vàng nhạt */
-      border-radius: 12px;
-      border: 2px solid #003366;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-
-    .info-box h2 {
-      background-color: #003366;  /* nền xanh đậm */
-      color: #ffffff;             /* chữ trắng */
-      padding: 10px 15px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      text-align: center;
-    }
-
-    .info-box ul {
-      text-align: left;
-      padding-left: 25px;
-      margin-top: 10px;
-    }
-
-    /* Khung chatbot */
     .chat-container {
-      margin-top: 20px;
+      margin-top: 30px;
       width: 420px;
       height: 550px;
       border-radius: 15px;
       overflow: hidden;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      border: 3px solid #ffcc00; /* viền vàng đậm */
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+
+      /* Ảnh nền cho ô chat */
+      background: url("BVU.png") no-repeat center center;
+      background-size: cover;
+
       display: flex;
       flex-direction: column;
-      background: #ffffffcc; /* nền trắng trong mờ để thấy logo nền */
     }
 
     /* Tùy chỉnh style Dialogflow Messenger */
     df-messenger {
-      width: 100%;
-      height: 100%; 
-      --df-messenger-bot-message: #e6f0ff;          /* bong bóng bot xanh nhạt */
-      --df-messenger-button-titlebar-color: #003366; /* thanh tiêu đề xanh đậm */
-      --df-messenger-chat-background-color: transparent; /* trong suốt để thấy nền */
+      width: 100%; height: 100%; 
+      background: transparent; /* trong suốt để thấy ảnh nền */ 
+      --df-messenger-bot-message: rgba(226, 240, 255, 0.9); 
+      --df-messenger-button-titlebar-color: #1a73e8; 
+      --df-messenger-chat-background-color: transparent; /* để nền không che ảnh */ 
       --df-messenger-font-color: #000000; 
-      --df-messenger-user-message: #ffeb66;          /* bong bóng user vàng nhạt */
+      --df-messenger-user-message: rgba(209, 234, 255, 0.9); 
+    }
+
+    /* CSS cho info-box */
+    .info-box {
+      text-align: center;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      color: #00008B;
+      max-width: 500px;
+      margin-top: 30px;
+      background-color: #ffff99;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    /* Tiêu đề có nền màu */
+    .info-box h2 {
+      background-color: #ffffff;  /* màu nền của box tiêu đề */
+      color: blue;                /* màu chữ */
+      padding: 10px 15px;          /* khoảng cách chữ với viền box */
+      border-radius: 8px;          /* bo góc */
+      margin-bottom: 15px;         /* khoảng cách với nội dung dưới */
+      text-align: center;
+    }
+
+    .info-box img {
+      margin-bottom: 15px;
+    }
+
+    .info-box ul {
+      text-align: left;
+      padding-left: 20px;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -115,7 +106,7 @@
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
     <df-messenger
       intent="WELCOME"
-      chat-title="BVU_Chatbot"
+      chat-title="University_Student_Chatbot"
       agent-id="82116dd8-0546-4e45-a914-cf0b8be9c418"
       language-code="en"
     ></df-messenger>
