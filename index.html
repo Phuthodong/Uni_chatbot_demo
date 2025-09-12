@@ -1,134 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>BVU Support</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
-      margin: 0;
-      position: relative;
-      overflow-x: hidden;
-      background: #ffffff;
+<div class="info-box" id="info-box">
+  <h2>BVU Chatbot</h2>
+  <p>
+    This AI-powered chatbot is designed to support university students 
+    by answering frequently asked questions about admissions, courses, 
+    campus life, and more.
+  </p>
+  <p>Try asking questions like:</p>
+  <ul>
+    <li onclick="sendToChatbot('What are the admission requirements?')">What are the admission requirements?</li>
+    <li onclick="sendToChatbot('How do I apply for a course?')">How do I apply for a course?</li>
+    <li onclick="sendToChatbot('Tell me about campus facilities.')">Tell me about campus facilities.</li>
+  </ul>
+
+  <!-- Nút mới: Start Chat -->
+  <div class="back-btn" onclick="openChat()">💬 Start Chat</div>
+</div>
+
+<script>
+  // Hàm gửi tin nhắn trực tiếp
+  function sendToChatbot(message) {
+    const dfMessenger = document.querySelector('df-messenger');
+    if(dfMessenger){
+      dfMessenger.renderCustomText(message);
+      dfMessenger.sendRequest(message);
     }
+  }
 
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: url("BVU.png") no-repeat center center;
-      background-size: 2000px;
-      opacity: 0.1;
-      z-index: -1;
-    }
-
-    h1 {
-      margin-top: 20px;
-      color: #003366;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-    }
-
-    .info-box {
-      text-align: center;
-      padding: 20px;
-      color: #003366;
-      max-width: 550px;
-      margin-top: 10px;
-      background-color: #ffeb66;
-      border-radius: 12px;
-      border: 2px solid #003366;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-
-    .info-box h2 {
-      background-color: #003366;
-      color: #ffffff;
-      padding: 10px 15px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      text-align: center;
-    }
-
-    .info-box ul {
-      text-align: left;
-      padding-left: 25px;
-      margin-top: 10px;
-    }
-
-    .info-box ul li {
-      cursor: pointer;
-      margin-bottom: 8px;
-      color: #0000cc;
-      text-decoration: underline;
-    }
-
-    .chat-container {
-      margin-top: 20px;
-      width: 420px;
-      height: 550px;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      border: 3px solid #ffcc00;
-      display: flex;
-      flex-direction: column;
-      background: #ffffffaa;
-    }
-
-    df-messenger {
-      width: 100%;
-      height: 100%;
-      --df-messenger-bot-message: #e6f0ff;
-      --df-messenger-button-titlebar-color: #003366;
-      --df-messenger-chat-background-color: transparent;
-      --df-messenger-font-color: #000000;
-      --df-messenger-user-message: #ffeb66;
-    }
-  </style>
-</head>
-<body>
-  <h1>BVU Support</h1>
-
-  <div class="info-box">
-    <h2>About the BVU Chatbot</h2>
-    <p>
-      This AI-powered chatbot is designed to support university students 
-      by answering frequently asked questions about admissions, courses, 
-      campus life, and more.
-    </p>
-    <p>Try asking questions like:</p>
-    <ul>
-      <li onclick="sendToChatbot('What are the admission requirements?')">What are the admission requirements?</li>
-      <li onclick="sendToChatbot('How do I apply for a course?')">How do I apply for a course?</li>
-      <li onclick="sendToChatbot('Tell me about campus facilities.')">Tell me about campus facilities.</li>
-    </ul>
-  </div> 
-
-  <div class="chat-container">
-    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-    <df-messenger
-      intent="WELCOME"
-      chat-title="BUV_Chatbot"
-      agent-id="82116dd8-0546-4e45-a914-cf0b8be9c418"
-      language-code="en"
-    ></df-messenger>
-  </div>
-
-  <script>
-    function sendToChatbot(message) {
+  // Hàm mở khung chat (cuộn tới khung chat)
+  function openChat() {
+    const chatContainer = document.querySelector('.chat-container');
+    if(chatContainer){
+      chatContainer.scrollIntoView({behavior: "smooth"});
+      // Nếu muốn, có thể tự động focus vào input của df-messenger
       const dfMessenger = document.querySelector('df-messenger');
-      if (dfMessenger) {
-        // Tạo sự kiện gửi tới chatbot
-        dfMessenger.renderCustomText(message); // hiển thị message như user gõ
-        dfMessenger.sendRequest(message);      // gửi message đến agent
+      if(dfMessenger){
+        const shadowRoot = dfMessenger.shadowRoot;
+        const input = shadowRoot.querySelector('input');
+        if(input) input.focus();
       }
     }
-  </script>
-</body>
-</html>
+  }
+</script>
